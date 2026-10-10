@@ -11,6 +11,24 @@
  },
  "phones": [
   {
+   "id": "pmv2o5d9a",
+   "brand": "Apple",
+   "model": "iPhone 14",
+   "storage": "128 GB",
+   "color": "Midnight",
+   "battery": 81,
+   "condition": "Ottimo",
+   "price": 330,
+   "status": "disponibile",
+   "notes": "iPhone 14 funziona perfettamente con scatola e cavo mai riparato tutti pezzi originali",
+   "photos": [
+    "foto/pmv2o5d9a-k3fbbb.jpg"
+   ],
+   "added": "2026-10-10",
+   "video": "video/pmv2o5d9a-ztid71.mp4",
+   "hidePrice": false
+  },
+  {
    "id": "ex1",
    "brand": "Apple",
    "model": "iPhone Air",
