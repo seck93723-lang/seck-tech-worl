@@ -1,0 +1,34 @@
+{
+ "shop": {
+  "name": "Seck Tech World",
+  "whatsapp": "+393311304377",
+  "phone": "+393311304377",
+  "instagram": "",
+  "facebook": "",
+  "paypal": "",
+  "city": "",
+  "note": "Telefoni usati controllati, con foto reali e stato batteria."
+ },
+ "phones": [
+  {
+   "id": "ex1",
+   "brand": "Apple",
+   "model": "iPhone Air",
+   "storage": "256 GB",
+   "color": "Mezzanotte",
+   "battery": 89,
+   "condition": "Ottimo",
+   "price": 379,
+   "status": "disponibile",
+   "notes": "Come nuovo",
+   "photos": [
+    "foto/ex1-ml55hk.jpg",
+    "foto/ex1-04nbcj.jpg"
+   ],
+   "added": "2026-09-28",
+   "video": "video/ex1-tzx0u3.mp4",
+   "hidePrice": false,
+   "offline": false
+  }
+ ]
+}
