@@ -9,12 +9,13 @@
 <meta property="og:site_name" content="Seck Tech World">
 <meta property="og:title" content="Seck Tech World – Telefoni nuovi e usati">
 <meta property="og:description" content="Guarda i telefoni disponibili: foto reali, prezzo e stato batteria. Scrivi su WhatsApp.">
-<meta property="og:image" content="cover.jpg">
+<meta property="og:image" content="https://seck93723-lang.github.io/seck-tech-worl/cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="">
+<meta property="og:url" content="https://seck93723-lang.github.io/seck-tech-worl/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="cover.jpg">
+<meta name="twitter:image" content="https://seck93723-lang.github.io/seck-tech-worl/cover.jpg">
 <meta name="theme-color" content="#04060a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -423,9 +424,9 @@ h1.logo{margin:6px 0 0;display:flex;flex-direction:column;align-items:center;gap
     catch(e){btn.disabled=false;btn.textContent=label;
       if(e.code==="conflict")msgEl.textContent="La vetrina è stata cambiata da un altro telefono. Ricarica la pagina e riprova.";
       else if(e.status===401)msgEl.textContent="Il codice GitHub non è più valido. Esci ed entra di nuovo con un codice nuovo.";
-      else if(e.status===403||e.status===404)msgEl.textContent="Il codice non ha il permesso di scrivere in questo repository (serve Contents: Read and write).";
+      else if(e.status===403||e.status===404)msgEl.textContent="Non salvato: "+errText(e);
       else if(e.status===413)msgEl.textContent="File troppo grande. Usa un video più corto.";
-      else msgEl.textContent="Non è stato possibile salvare (connessione?). Riprova tra poco.";
+      else msgEl.textContent="Non è stato possibile salvare: "+errText(e);
       return false}}
 
   // ---------- caricamento ----------
@@ -476,8 +477,8 @@ h1.logo{margin:6px 0 0;display:flex;flex-direction:column;align-items:center;gap
     try{
       if(needData){bar.textContent="Prima configurazione: carico i telefoni su GitHub…";await uploadMedia((i,n)=>{bar.textContent="Prima configurazione: foto "+i+"/"+n+"…"});await commitData("Vetrina: primi telefoni")}
       bar.textContent="Prima configurazione: copertina WhatsApp…";
-      const covB64=await drawCover();
-      if(covB64){const ex=await getFile("cover.jpg").catch(()=>null);await putFile("cover.jpg",covB64,ex&&ex.sha,"Vetrina: copertina WhatsApp")}
+      const covB64=await getFile("cover.jpg").catch(()=>null)?"":await drawCover();
+      const ex=await getFile("cover.jpg").catch(()=>null);if(!ex&&covB64)await putFile("cover.jpg",covB64,null,"Vetrina: copertina WhatsApp")
       const pg=await getFile(GH.page);
       if(pg){const base=pageBase();let t=pg.text;
         t=t.replace(/(<meta property="og:image" content=")[^"]*(")/,"$1"+base+"cover.jpg$2").replace(/(<meta property="og:url" content=")[^"]*(")/,"$1"+base+"$2")
@@ -486,7 +487,13 @@ h1.logo{margin:6px 0 0;display:flex;flex-direction:column;align-items:center;gap
            ;
         if(t!==pg.text)await putFile(GH.page,b64utf8(t),pg.sha,"Vetrina: copertina WhatsApp e pagina alleggerita")}
       bar.textContent=old;toast("Configurazione completata ✓",3000);
-    }catch(e){bar.textContent=old;toast("Configurazione non finita: riapri l'area gestione per riprovare",4000)}}
+    }catch(e){bar.textContent="⚠️ Configurazione non riuscita. Motivo: "+errText(e)+" ";const rb=document.createElement("button");rb.className="btn small";rb.type="button";rb.textContent="Riprova";rb.onclick=()=>{bar.textContent=old;firstSetup(!dataSha)};bar.appendChild(rb)}}
+  function errText(e){const m=e&&e.info&&e.info.message?" ("+e.info.message+")":"";const st=e&&e.status;
+    if(st===401)return "codice non valido o scaduto"+m;
+    if(st===403||st===404)return "il codice non ha il permesso di scrivere: serve Contents = Read and write sul repository"+m;
+    if(st===409||st===422)return "conflitto con GitHub, riprova"+m;
+    if(st===413)return "file troppo grande"+m;
+    if(st)return "errore GitHub "+st+m;return "connessione non riuscita ("+((e&&e.message)||"?")+")"}
 
   // ---------- area gestione (login) ----------
   function readCfg(){try{return JSON.parse(localStorage.getItem(LS)||"null")}catch(e){return null}}
