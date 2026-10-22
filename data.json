@@ -26,7 +26,8 @@
    ],
    "added": "2026-10-10",
    "video": "video/pmv2o5d9a-ztid71.mp4",
-   "hidePrice": false
+   "hidePrice": false,
+   "offline": true
   },
   {
    "id": "ex1",
