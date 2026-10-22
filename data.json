@@ -11,6 +11,26 @@
  },
  "phones": [
   {
+   "id": "pmvjh5emn",
+   "brand": "Apple",
+   "model": "iPhone 12",
+   "storage": "64 GB",
+   "color": "Blu",
+   "battery": 75,
+   "condition": "Ottimo",
+   "price": 180,
+   "status": "disponibile",
+   "notes": "Il telefono funziona perfettamente tutti pezzi originali mai riparato",
+   "photos": [
+    "foto/pmvjh5emn-ltym4y.jpg",
+    "foto/pmvjh5emn-0fkbiq.jpg",
+    "foto/pmvjh5emn-t0f8lh.jpg"
+   ],
+   "added": "2026-10-22",
+   "video": "video/pmvjh5emn-n0mu7a.mp4",
+   "hidePrice": false
+  },
+  {
    "id": "pmv2o5d9a",
    "brand": "Apple",
    "model": "iPhone 14",
